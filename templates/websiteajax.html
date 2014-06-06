@@ -1,0 +1,19 @@
+<table id="website_table">
+    <tr> 
+      <th>Website</th>
+      <th>Last Probe</th>
+      <th>Code</th>
+      <th>Status</th>
+    </tr>
+    {% for website in website_list %}
+        {% if website %}
+            <tr>
+                <td><a href="/details/website/{{ website.slug }}/">{{ website.url|escape }}</a></td>
+                <td> {% if website.probe_time %}{{ website.probe_time|timesince }} ago{% else %} Never {% endif %}</td>
+                <td> {{ website.status_code}}</td>
+                <td> {{ website.status }}</td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+</table>
+

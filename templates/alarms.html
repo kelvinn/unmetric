@@ -1,0 +1,52 @@
+{% extends "base.html" %} 
+{% block content %}
+      <div id="bd">
+        <div class="yui-ga">
+          <div class="yui-u first">
+         <p>Last 30 days of alerts</p>
+          
+            <table id="alarm_table">
+                <tr> 
+                  <th>Website</th>
+                  <th>Start</th>
+                  <th>End</th>
+                </tr>
+                {% for alert in alert_list %}
+                    <tr>
+                        <td>{{ alert.website.url }}</td>
+                        <td>{{ alert.start_date }}</td>
+                        <td>{{ alert.end_date }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+           
+          </div>
+        </div>
+      </div>
+{% endblock %}
+
+{% block to_footer %}
+    <script type="text/javascript" src="/js/jquery-1.6.1.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.corner.js"></script>
+    <script type="text/javascript">
+      function checkSites() {
+        $.get("/website_html/",
+          function(data){
+            $("#websiteresults").html(data);
+          });
+          window.setTimeout(checkSites, 10000);
+      }
+
+      $(document).ready(function(){
+          checkSites();
+           $(".rounded").corner("round 5px");
+           $(".fullround").corner("round 5px");
+           $(".yui-ga").corner();
+           $(".yui-gb").corner();
+           $(".yui-gc").corner();
+           $(".yui-gd").corner();
+           $(".yui-ge").corner();
+           $(".yui-g").corner();
+      });
+    </script>
+{% endblock %}

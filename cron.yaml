@@ -1,0 +1,12 @@
+cron:
+- description: probe website job
+  url: /probe_all_websites/
+  schedule: every 1 minutes
+
+- description: probe down websites job
+  url: /probe_down_websites/
+  schedule: every 1 minutes
+  
+- description: probe statistics
+  url: /runstats/
+  schedule: every 60 minutes

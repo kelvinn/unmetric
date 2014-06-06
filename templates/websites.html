@@ -1,0 +1,43 @@
+{% extends "base.html" %} 
+{% block content %}
+  <div id="bd">
+    <div class="yui-ga">
+      <div class="yui-u first">
+        {% if form %}
+        <form action="/websites/" method="post" >
+          {{ form }}
+          <div><input id="submit" type="submit" value="Start Monitoring"></div>
+        </form>
+        <br /> <br />  
+        {% else %}
+          <p>You've reached the 15 site limit.  If you wish for more sites please send an email to kelvin@kelvinism.com</p><br />
+        {% endif %}
+       
+                 
+        <div id="websiteresults"></div>
+        
+      </div>
+    </div>
+  </div>
+{% endblock %}
+      
+      
+{% block to_footer %}
+    <script type="text/javascript" src="/js/jquery-1.6.1.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.corner.js"></script>
+    <script type="text/javascript">
+      function checkSites() {
+        $.get("/website_html/",
+          function(data){
+            $("#websiteresults").html(data);
+          });
+          window.setTimeout(checkSites, 10000);
+      }
+
+      $(document).ready(function(){
+          checkSites();
+           $(".rounded").corner("round 5px");
+           $(".yui-ga").corner();
+      });
+    </script>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends "base.html" %} 
+{% block content %}
+  <div id="bd">
+    <div class="yui-gd">
+      <div class="yui-u first">
+
+              {% if form %}
+                <form action="/wget/" method="post" >
+                  {{ form }}
+                  <div><input id="submit" type="submit" value="Submit Backup Schedule"></div>
+                </form>
+                
+              <br /> <br />  
+              {% else %}
+                <p>You've reached the 15 site limit.  If you wish for more sites please send an email to kelvin@kelvinism.com</p><br />
+              {% endif %}
+       </div>
+      <div class="yui-u">
+ <div id="wgetresults">
+        <table id="wget_table">
+            <tr> 
+              <th>Name</th>
+              <th>Days of the Week</th>
+              <th>Start Time</th>
+              <th>End Time</th>
+            </tr>
+            {% for wget_obj in wget_list %}
+                {% if wget_obj %}
+                    <tr>
+                        <td><a href="/details/wget/{{ wget_obj.slug }}/">{{ wget_obj.name }}</a></td>
+                        <td> 
+                            {% if wget_obj.dow %}
+                              {% for day_i in wget_obj.dow %}
+                                  {{ day_i }}
+                              {% endfor %}
+                            {% endif %}
+                        </td>
+                        <td> {{ wget_obj.start_time }}</td>
+                        <td> {{ wget_obj.end_time }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+
+        
+        
+        
+        </div>
+      </div>
+    </div>
+       
+      </div>
+    </div>
+  </div>
+{% endblock %}
+      
+      
+{% block to_footer %}
+    <script type="text/javascript" src="/js/jquery-1.6.1.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.corner.js"></script>
+    <script type="text/javascript">
+      function checkSites() {
+        $.get("/website_html/",
+          function(data){
+            $("#websiteresults").html(data);
+          });
+          window.setTimeout(checkSites, 10000);
+      }
+
+      $(document).ready(function(){
+          checkSites();
+           $(".rounded").corner("round 5px");
+           $(".yui-ga").corner();
+           $(".yui-gd").corner();
+      });
+    </script>
+{% endblock %}

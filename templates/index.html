@@ -1,0 +1,45 @@
+{% extends "base.html" %} 
+{% block content %}
+      <div id="bd">
+        <div class="yui-ge">
+          <div class="yui-u first">
+          <pre>
+In [1]: print intro
+Out[1]:</pre><br />
+
+<p>Unmetric is a free tool created by <a href="http://www.kelvinism.com">Kelvin Nicholson</a> for monitoring the availability of websites.  It was written using <a href="http://www.python.org">Python</a> and <a href="http://www.djangoproject.com">Django</a>.</p> <br />
+            
+            <p>  You can <a href="{{ login_url }}">sign-on</a> now using a valid Google Account and start adding sites immediately.  After you've added a site it will be polled via a HTTP HEAD request every five minutes.  If your site returns a <a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes">status code</a> other than 200, it will be retested and an email will be sent to your account.  A second email will be sent when your site's status changes.</p>
+            <br />
+<pre>
+In [2]: from unmetric.tools import get_stats
+In [3]: stat_dict = get_stats()
+In [4]: print stat_dict
+Out [4]: {'websites': {{ website_total }}, 'alerts': {{ alert_total }}}
+
+</pre><br />
+
+
+          </div>
+          <div class="yui-u">
+            <div class="intro-space">
+                <p>Get the Android App</p>
+                <img src="https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=unmetric&choe=UTF-8" />
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock %}
+   
+   
+{% block to_footer %}
+    <script type="text/javascript" src="/js/jquery-1.6.1.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.corner.js"></script>
+    <script type="text/javascript">
+
+      $(document).ready(function(){
+           $(".rounded").corner("round 5px");
+           $(".yui-ge").corner();
+      });
+    </script>
+{% endblock %}

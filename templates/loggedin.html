@@ -1,0 +1,39 @@
+{% extends "base.html" %} 
+{% block content %}
+      <div id="bd">
+        <div class="yui-ge">
+          <div class="yui-u first">
+            <form action="/submit" method="post">
+              Website to monitor: 
+              <div><input id="website_url" type="text" name="website_url" maxlength="20" /></div><br />
+              <div><input id="submit" type="submit" value="Start Monitoring"></div>
+            </form>
+            <br /> <br />
+            {% for website in website_list %}
+              <blockquote>
+              URL: {{ website.url|escape }} ({{ website.status }})<br />
+              AU ttlb: {{ website.au_ttlb }} | {{ website.au_time }}<br />
+              UK ttlb: {{ website.uk_ttlb }} | {{ website.uk_time }}<br />
+              US ttlb: {{ website.us_ttlb }} | {{ website.us_time }}<br />
+              </blockquote>
+              <hr />
+            {% endfor %}
+            Current Alerts:
+            {% for alert in alert_list %}
+              <blockquote>
+                URL: {{ alert.website.url }}<br />
+                Start Time: {{ alert.start_date }}<br />
+                End Time: {{ alert.end_date }}<br />
+                Mobiles:{% for watcher in alert.website.members %}{{ watcher.mobile }} {% endfor %}<br />
+              </blockquote>
+              <hr />
+            {% endfor %}
+          </div>
+          <div class="yui-u">
+            <div class="intro-space">
+                {{ user.nickname }}
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock %}

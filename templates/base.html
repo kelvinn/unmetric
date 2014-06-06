@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/reset-fonts-grids.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/index.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico"/>
+    <meta name="google-site-verification" content="AlkFRr--gfNg6Na1oTH_IZMAo4R2EmasfegSwTCcbuY" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="Description" content="" />
+  </head>
+
+  <body>
+    <div id="greenbar"></div>
+    <div id="hd">
+        <div id="menu">
+        {% if user %}
+            <a href="/websites/" class="rounded">Websites</a> <a href="/alarms/" class="rounded">Alarm History</a> <a href="{{ logout_url }}" class="rounded">Logout</a>
+        {% else %}
+            <a href="{{ login_url }}" class="rounded">Login</a>
+        {% endif %}
+        </div>
+    </div>
+    <div id="doc4" class="yui-t7">
+        {% block content %}{% endblock %}
+    </div>
+    
+    {% block to_footer %}{% endblock %}
+
+
+</body>
+</html>
+
+
